@@ -1,10 +1,17 @@
-provider "aws" {
-  region = "us-east-1"
+variable "ami_id" {
+description = "value for the ami"  
 }
 
-module "ec2_instance" {
-  source = "./modules/ec2_instance"
-  ami_value = "ami-053b0d53c279acc90" # replace this
-  instance_type_value = "t2.micro"
-  subnet_id_value = "subnet-019ea91ed9b5252e7". # replace this
+variable "instance_type_value" {
+  description = "instance of the ec2"
+}
+
+
+provider "aws" {
+  region = "ap-south-1"
+}
+
+resource "aws_instance" "example1" {
+  ami="var.ami_id"
+  instance_type = "var.instance_type_value" 
 }
